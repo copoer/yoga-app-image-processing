@@ -16,8 +16,9 @@ let images_array = [];
 
 function process_image(path, diff, number) {
     const data = fs.readFileSync(path);
-    const png = PNG.sync.read(data);
-    const img_str = imageconverter.RGBAtoString(png.data, {width:png.width, height:png.height, transparent:1, compression:1, output:'raw'});
+    const png = PNG.sync.read(data, {height:50, width:50});
+    console.log(png);
+    const img_str = imageconverter.RGBAtoString(png.data, {width:png.width, height:png.height, transparent:1, output:'string', inverted: 1, compression: 0, rgbaOut:png.data});
     images_array.push({
         m: (number > 1),
         i: img_str,
@@ -39,5 +40,4 @@ folders.forEach(folder => {
     ["1","2"].forEach(e => process_folder(folder, e));
 });
 const images_data = JSON.stringify(images_array);
-console.log(images_data);
 fs.writeFileSync("images.json", images_data);

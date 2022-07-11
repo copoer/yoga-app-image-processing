@@ -1,4 +1,5 @@
 const btoa = require('btoa');
+
 /* Copyright 2020 Gordon Williams, gw@pur3.co.uk
    https://github.com/espruino/EspruinoWebTools
 */
@@ -491,7 +492,7 @@ const btoa = require('btoa');
     } else {
       throw new Error("Unknown output style");
     }
-    return imgstr;
+    return btoa(str);
   }
 
   /* Add a checkerboard background to any transparent areas and
